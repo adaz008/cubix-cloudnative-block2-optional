@@ -1,0 +1,6 @@
+docker build -t front-app:latest --build-arg IMAGE_BUILDER="Szigeti Ádám" .
+
+docker run --rm -p 8080:8080 `
+    -e JAVA_OPTS="-Dfrontend.default.message=env" `
+    -e JAR_ARGS="--spring.main.banner-mode=off" `
+    front-app:latest
