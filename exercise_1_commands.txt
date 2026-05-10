@@ -1,0 +1,18 @@
+docker pull quay.io/drsylent/cubix/block2/optional-backend:springboot3
+
+docker image inspect quay.io/drsylent/cubix/block2/optional-backend:springboot3
+
+docker run --rm -it --entrypoint sh quay.io/drsylent/cubix/block2/optional-backend:springboot3
+
+ls-> kilistáztam a fájlokat
+
+find / -name "*.jar" 2>/dev/null -> kerestem a jar fájlokat
+
+find / -name "application.properties" -o -name "application.yml" -o -name "application.yaml" 2>/dev/null -> majd megkerestem a spring config fájlokat
+
+cat /var/opt/appconfig/application.properties -> kiolvastam a fájl tartalmát
+
+docker run --rm -p 8081:8080 `
+ -v "${PWD}\application.properties:/var/opt/appconfig/application.properties" `
+ -e SPRING_CONFIG_ADDITIONAL_LOCATION="file:/var/opt/appconfig/application.properties" `
+ quay.io/drsylent/cubix/block2/optional-backend:springboot3 -> létrehoztam lokálisan a saját application.properties fájlom amiben a változó értékét Cubixra állítottam
